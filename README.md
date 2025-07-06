@@ -219,7 +219,7 @@ run_prediction: true  # Set to false to skip prediction
 ## Logging and Error Handling
 - The pipeline uses Python’s built-in logging module to record runtime information, warnings, and errors.
 
-- Logs provide detailed progress updates for each pipeline stage (cv, train, predict) and help with troubleshooting.
+- Logs provide detailed progress updates for each pipeline stage (`process`, `gird_search_cv`, `cv_plot`,`train`,`predict`) and help with troubleshooting.
 
 - Log messages include timestamps and log levels (INFO, WARNING, ERROR).
 
