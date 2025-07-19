@@ -113,7 +113,7 @@ def grid_search_cv(config):
         weight_decay=config['grid_search']['weight_decay']
     )
 
-    logger.info(f"Total hyperparameter combinations: {len(param_grid)}")
+    #logger.info(f"Total hyperparameter combinations: {len(param_grid)}")
     station_cv.cv_outs(
         x, y, param_grid=param_grid,
         val_size=config['validation_size'], initial_train_size=None,

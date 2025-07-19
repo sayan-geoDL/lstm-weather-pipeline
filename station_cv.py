@@ -79,6 +79,7 @@ def cv_outs (x,y,param_grid,initial_train_size=None,
         combinations=list(product(*values))
         return [dict(zip(keys,combo)) for combo in combinations]
     param_combos=get_param_combinations(param_grid)
+    logger.info(f"Total hyperparameter combinations: {len(param_combos)}")
     val_size=round((val_size/100)*len(y))
     if initial_train_size is None:
         initial_train_size = (x.shape[0] - k * val_size) // k
@@ -160,10 +161,11 @@ def cv_outs (x,y,param_grid,initial_train_size=None,
                     if temp > 90:
                         logger.info(f"Temperature {temp}°C exceeded threshold! Exiting.")
                         sys.exit(1)
-
-        mean_score=np.mean(overfit_scores)
-        std_score=np.std(overfit_scores)
-        mean_rmse=np.mean(val_rmses)
+        fold_weights=[train_starts-train_ends for (train_starts,train_ends,_,_) in folds]
+        total_weights=sum(fold_weights)
+        mean_score=sum(w*s for w,s in zip(fold_weights,overfit_scores))/total_weights
+        std_score=np.sqrt(sum(w*(s-mean_score)**2 for w,s in zip(fold_weights,overfit_scores))/total_weights)
+        mean_rmse=sum(w*s for w,s in zip(fold_weights,val_rmses))/total_weights
         count+=1
         results.append({
             **params,
@@ -207,6 +209,10 @@ def performance_box_plots(in_file='./out/train_test/cv_result.csv'):
     df=pd.read_csv(in_file)
     score='mean_overfit_score'
     df['weight_decay_clean']=df['weight_decay'].fillna('No L2')
+    df['hidden_size'] = df['hidden_size'].astype(str)
+    df['num_layers'] = df['num_layers'].astype(str)
+    df['learning_rate'] = df['learning_rate'].astype(str)
+    df['mean_overfit_score'] = df['mean_overfit_score'].astype(float)
     params={'hidden_size':'Hidden Units',
             'num_layers': 'Number of Layers',
             'weight_decay_clean':'Weight Decay',
@@ -232,7 +238,7 @@ def performance_box_plots(in_file='./out/train_test/cv_result.csv'):
         full_path=os.path.join('./plots', filename)
         counter+=1
     fig.savefig(full_path)
-    plt.show(block=False)
+    #plt.show(block=False)
 
 ###################### plotter for cross validation ###########################
 def cv_plot(x,y,cv_result='./out/train_test/cv_result.csv',initial_train_size=None,
