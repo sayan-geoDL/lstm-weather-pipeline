@@ -116,6 +116,7 @@ This is an LSTM Model, which will take in `n_step` number of look back days to p
      ```python
      overfit_score = val_mse + (0.5 * abs(val_mse - train_mse)) / train_mse
      ```
+     where `val_mse` and `train_mse` are the mean square errors over the validation set and the training set, which there after is averaged over all the folds using a weighted averaging scheme based on the length of each folds. 
    - Plots the box plot of the `overfit_score` for each grid parameters and saves them to `./plots/performance_boxplots.png`. Thereafter the user can choose other hyperparameter grids depending on
      the plots for further fine tuning of the grid and then decide upon a final combination of hyperparameters for training.
    - Save the combinations of hyperparameters to `./out/train_test/cv_result.csv` ranked according to lowest to highest overfit scores.
