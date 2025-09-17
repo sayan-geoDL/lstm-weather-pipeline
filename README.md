@@ -19,6 +19,7 @@ This repository presents a modular, production-ready pipeline built on Long Shor
 - [Logging and Error Handling](#logging-and-error-handling)
 - [Sample Results](#sample-results)
 - [Data Sources](#data-sources)
+- [Third-party Licenses](#third-party-licenses)
 ---
 
 ## Overview
@@ -258,3 +259,18 @@ The data itself is **not included** in this repository to keep it lightweight an
 
 - **Station:** London Heathrow Airport (EGLL)  
 - **Source:** [Meteostat Station Data](https://meteostat.net/en/station/03772)
+
+## Third-Party Licenses
+
+This project builds upon several open-source libraries. Each library is governed by its own license:
+
+| Package        | Version Range   | License                               | License Link |
+|----------------|-----------------|---------------------------------------|--------------|
+| **PyYAML**     | >=6.0,<7.0      | MIT                                   | [PyYAML License](https://github.com/yaml/pyyaml/blob/main/LICENSE) |
+| **matplotlib** | >=3.8,<4.0      | Matplotlib License (BSD-compatible)   | [Matplotlib License](https://matplotlib.org/stable/users/project/license.html) |
+| **meteostat**  | >=1.7,<2.0      | MIT                                   | [Meteostat License](https://github.com/meteostat/meteostat-python/blob/main/LICENSE) |
+| **numpy**      | >=1.26,<2.0     | BSD 3-Clause                          | [NumPy License](https://github.com/numpy/numpy/blob/main/LICENSE.txt) |
+| **pandas**     | >=2.2,<3.0      | BSD 3-Clause                          | [Pandas License](https://github.com/pandas-dev/pandas/blob/main/LICENSE) |
+| **psutil**     | >=5.9,<6.0      | BSD 3-Clause                          | [psutil License](https://github.com/giampaolo/psutil/blob/master/LICENSE) |
+| **seaborn**    | >=0.13,<1.0     | BSD 3-Clause                          | [Seaborn License](https://github.com/mwaskom/seaborn/blob/main/LICENSE) |
+| **torch**      | >=2.6,<3.0      | BSD-style (modified)                  | [PyTorch License](https://github.com/pytorch/pytorch/blob/main/LICENSE) |
